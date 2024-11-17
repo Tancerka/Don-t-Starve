@@ -37,8 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'django_extensions',
     'DontStarve',
+=======
+    'app'
+>>>>>>> 1d83e89 (Git commit)
 ]
 
 MIDDLEWARE = [
