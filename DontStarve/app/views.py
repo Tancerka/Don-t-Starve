@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .logowanie.form import CustomLoginForm
+from .logowanie.form import CustomLoginForm, CustomRegisterForm
 from django.contrib.auth import authenticate, login
 
 # Create your views here.
@@ -31,19 +31,27 @@ def main(request):
     return render(request, "resto/main.html",{'username': username})
 
 def login(request):
-    if request.user.is_authenticated:
-        username = request.user.username  # Pobierz nazwę użytkownika
+    if request.method == 'POST':
+        form = CustomLoginForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('main')  # Przekierowanie po zalogowaniu
     else:
-        username = None  # Brak zalogowanego użytkownika
-    return render(request, "resto/login.html",{'username': username})
+        form = CustomLoginForm()
+    return render(request, "resto/login.html",{'form': form})
 
 
 def register(request):
-    if request.user.is_authenticated:
-        username = request.user.username  # Pobierz nazwę użytkownika
+    if request.method == 'POST':
+        form = CustomRegisterForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('main')  # Przekierowanie po rejestracji
     else:
-        username = None  # Brak zalogowanego użytkownika
-    return render(request, "resto/register.html",{'username': username})
+        form = CustomRegisterForm()
+    return render(request, "resto/register.html",{'form': form})
 
 
 def reservation(request):

@@ -23,10 +23,31 @@
     <div class="login-container">
         <h2>Załóż konto</h2>
         <form id="{% static 'register-form' %}" action="/register/" method="POST">
-            <input type="text" id="username" name="username" placeholder="Nazwa użytkownika" required>
-            <input type="email" id="email" name="email" placeholder="E-mail" required>
-            <input type="password" id="password" name="password" placeholder="Hasło" required>
-            <input type="password" id="confirm-password" name="confirm-password" placeholder="Powtórz hasło" required>
+            {% csrf_token %}
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            {{ form.username.errors }}
+
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            {{ form.email.errors }}
+
+            {{ form.password.label_tag }}
+            {{ form.password }}
+            {{ form.password.errors }}
+
+            {{ form.password2.label_tag }}
+            {{ form.password2 }}
+            {{ form.password2.errors }}
+
+            
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <p class="text-danger small mt-2">{{ error }}</p>
+                {% endfor %}
+                {% else %}
+                <p> <br><br> </p>
+            {% endif %}
             <button type="submit">Zarejestruj się</button>
         </form>
         <p id="error-message"></p>
