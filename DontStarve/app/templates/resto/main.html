@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona Główna</title>
+    <link rel="stylesheet" href="{% static 'stylemain.css' %}">
+</head>
+<body>
+    <!-- Ikona menu -->
+    <div class="menu-icon" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Menu boczne -->
+    <div class="side-menu" id="sideMenu">
+        <ul>
+            <li><a href="/reservation/">Rezerwacja</a></li>
+            <!--<li><a href="takeaway.html">Zamów online</a></li>-->
+            <!--<li><a href="basket.html">Koszyk</a></li> -->
+            <!-- <li><a href="account.html">Konto</a></li>--> 
+            <li><a href="/login2/">Wyloguj</a></li>
+        </ul>
+    </div>
+
+    <!-- Główna zawartość -->
+    <div class="main-content">
+        <div class="dish">
+            <img src="dish1.jpg" alt="Zdjęcie dania">
+            <div class="dish-info">
+                <h3>Nazwa Dania 1</h3>
+                <p>Składnik 1, Składnik 2, Składnik 3</p>
+            </div>
+            <div class="dish-price">
+                <span>25 PLN</span>
+                <button>Dodaj do koszyka</button>
+            </div>
+        </div>
+
+        <div class="dish">
+            <img src="dish2.jpg" alt="Zdjęcie dania">
+            <div class="dish-info">
+                <h3>Nazwa Dania 2</h3>
+                <p>Składnik A, Składnik B, Składnik C</p>
+            </div>
+            <div class="dish-price">
+                <span>30 PLN</span>
+                <button>Dodaj do koszyka</button>
+            </div>
+        </div>
+
+        <!-- trzeba to zautomatyzować zależnie od ilości dań w bazie danych-->
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const sideMenu = document.getElementById("sideMenu");
+            sideMenu.classList.toggle("open");
+        }
+    </script>
+</body>
+</html>

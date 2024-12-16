@@ -2,4 +2,9 @@
 {% block title %} DontStarve {% endblock %}
 {% block content %}
 <p>Strona główna</p>
+{% if username %}
+        <p>Witaj, {{ username }}!</p>
+    {% else %}
+        <p>Witaj, niezalogowany użytkowniku!</p>
+{% endif %}
 {% endblock %}

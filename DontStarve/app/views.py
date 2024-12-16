@@ -5,7 +5,11 @@ from django.contrib.auth import authenticate, login
 # Create your views here.
 
 def home(request):
-    return render(request, "home.html")
+    if request.user.is_authenticated:
+        username = request.user.username  # Pobierz nazwę użytkownika
+    else:
+        username = None  # Brak zalogowanego użytkownika
+    return render(request, "home.html",{'username': username})
 
 def logowanie(request):
     if request.method == 'POST':
@@ -18,4 +22,34 @@ def logowanie(request):
         form = CustomLoginForm()
 
     return render(request, "resto/index.html", {'form': form})
-    
+
+def main(request):
+    if request.user.is_authenticated:
+        username = request.user.username  # Pobierz nazwę użytkownika
+    else:
+        username = None  # Brak zalogowanego użytkownika
+    return render(request, "resto/main.html",{'username': username})
+
+def login(request):
+    if request.user.is_authenticated:
+        username = request.user.username  # Pobierz nazwę użytkownika
+    else:
+        username = None  # Brak zalogowanego użytkownika
+    return render(request, "resto/login.html",{'username': username})
+
+
+def register(request):
+    if request.user.is_authenticated:
+        username = request.user.username  # Pobierz nazwę użytkownika
+    else:
+        username = None  # Brak zalogowanego użytkownika
+    return render(request, "resto/register.html",{'username': username})
+
+
+def reservation(request):
+    if request.user.is_authenticated:
+        username = request.user.username  # Pobierz nazwę użytkownika
+    else:
+        username = None  # Brak zalogowanego użytkownika
+    return render(request, "resto/reservation.html",{'username': username})
+  
