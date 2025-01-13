@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .logowanie.form import CustomLoginForm, CustomRegisterForm
 from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 # Create your views here.
 
@@ -46,9 +47,8 @@ def register(request):
     if request.method == 'POST':
         form = CustomRegisterForm(request, data=request.POST)
         if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('main')  # Przekierowanie po rejestracji
+            form.save()
+            return redirect('resto/main.html')  # Przekierowanie po rejestracji
     else:
         form = CustomRegisterForm()
     return render(request, "resto/register.html",{'form': form})

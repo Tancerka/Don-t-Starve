@@ -13,6 +13,7 @@ class Table(models.Model):
         return f"Stolik {self.number} ({self.seats} miejsc)"
 
 # Model dla dostępnych godzin rezerwacji
+#wywalic
 class ReservationTime(models.Model):
     time = models.TimeField(unique=True)  # Godzina dostępna dla rezerwacji
 
