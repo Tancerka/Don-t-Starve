@@ -23,8 +23,8 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 60px;
-    background-color: #4CAF50;
+    height: 70px;
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: center;
     padding: 0 20px;
@@ -48,7 +48,7 @@ body {
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-/* Kontener logowania */
+/* Kontener logowania i rejestracji */
 .login-container {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 30px;
@@ -57,7 +57,7 @@ body {
     width: 300px;
     text-align: center;
     position: relative;
-    top: 80px; /* Aby formularz nie kolidował z paskiem nawigacyjnym */
+    top: 80px;
 }
 
 h2 {
@@ -66,8 +66,8 @@ h2 {
 }
 
 input[type="text"],
-input[type="password"],
-input[type="email"] {
+input[type="email"],
+input[type="password"] {
     width: 90%;
     padding: 10px;
     margin-bottom: 10px;
@@ -91,7 +91,82 @@ button:hover {
     background-color: #45a049;
 }
 
+.register-link {
+    margin-top: 15px;
+    color: #007BFF;
+}
+
+.register-link a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
 #error-message {
     color: red;
     margin-top: 10px;
 }
+
+/* Kalendarz */
+#calendar {
+    margin: 20px 0;
+    margin-top: 100px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.arrow {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 6cqw;
+}
+
+.arrow:hover {
+    background-color: #45a049;
+}
+
+#calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.day, .empty {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.day:hover {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.selected {
+    background-color: #45a049;
+    color: #fff;
+}
+
+.empty {
+    background-color: transparent;
+    pointer-events: none;
+}
+
