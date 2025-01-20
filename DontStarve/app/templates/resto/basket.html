@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koszyk</title>
+    <link rel="stylesheet" href="stylemain.css">
+</head>
+<body>
+    <!-- Pasek na górze strony -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo" id="logo">
+        </div>
+        <div class="title">
+            <a href="main.html" style="text-decoration: none; color: inherit;">
+                <h1>Don't Starve</h1>
+            </a>
+        </div>
+    </header>
+    <!-- Ikona menu -->
+    <div class="menu-icon" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Menu boczne -->
+    <div class="side-menu" id="sideMenu">
+        <ul>
+            <li><a href="reservation.html">Rezerwacja</a></li>
+            <li><a href="takeaway.html">Zamów online</a></li>
+            <li><a href="basket.html">Koszyk</a></li>
+            <li><a href="account.html">Konto</a></li>
+            <li><a href="login.html">Wyloguj</a></li>
+        </ul>
+    </div>
+
+    <!-- Menu boczne -->
+    <div class="side-menu" id="sideMenu">
+        <ul>
+            <li><a href="reservation.html">Rezerwacja</a></li>
+            <li><a href="takeaway.html">Zamów online</a></li>
+            <li><a href="basket.html">Koszyk</a></li>
+            <li><a href="account.html">Konto</a></li>
+            <li><a href="login.html">Wyloguj</a></li>
+        </ul>
+    </div>
+
+    <!-- Główna zawartość -->
+    <div class="main-content basket-container">
+        <h1>Twój Koszyk</h1>
+        <div class="basket-items">
+            <!-- Przykładowe dane, zaimplementuj python!-->
+            <div class="basket-item">
+                <img src="dish1.jpg" alt="ZDJ">
+                <div class="basket-info">
+                    <h3>Nazwa Dania</h3>
+                    <p>25 PLN</p>
+                </div>
+                <button class="remove-button">Usuń</button>
+            </div>
+        </div>
+        <div class="basket-summary">
+            <h2>Podsumowanie</h2>
+            <p>Razem: <span class="total-price">25 PLN</span></p>
+            <!-- Dodanie onclick -->
+            <button class="checkout-button" onclick="openOrderPopup()">Przejdź do podsumowania</button>
+        </div>
+    </div>
+
+    <div id="orderPopup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closeOrderPopup()">&times;</span>
+    
+            <h2>Opcje Dostawy i Płatności</h2>
+    
+            <!-- Opcje odbioru -->
+            <h3>Wybierz sposób odbioru:</h3>
+            <label>
+                <input type="radio" name="deliveryOption" value="odbiór_osobisty" checked>
+                Odbiór osobisty
+            </label><br>
+            <label>
+                <input type="radio" name="deliveryOption" value="dostawa" id="deliveryRadio">
+                Dostawa na adres
+            </label><br>
+    
+            <!-- Adres dostawy -->
+            <div id="addressField" style="display: none;">
+                <label for="address">Adres dostawy:</label>
+                <input type="text" id="address" name="address" placeholder="Wpisz adres">
+            </div>
+    
+            <!-- Metody płatności -->
+            <h3>Wybierz metodę płatności:</h3>
+            <label>
+                <input type="radio" name="paymentMethod" value="karta" checked>
+                Karta
+            </label><br>
+            <label>
+                <input type="radio" name="paymentMethod" value="przelew">
+                Przelew
+            </label><br>
+            <label>
+                <input type="radio" name="paymentMethod" value="paypal">
+                PayPal
+            </label><br>
+    
+            <button class="payment-btn" onclick="confirmPayment()">Zapłać</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const sideMenu = document.getElementById("sideMenu");
+            sideMenu.classList.toggle("open");
+        }
+
+        document.querySelector('.checkout-button').addEventListener('click', openOrderPopup);
+
+        function openOrderPopup() {
+            document.getElementById('orderPopup').style.display = 'block';
+        }
+
+        function closeOrderPopup() {
+            document.getElementById('orderPopup').style.display = 'none';
+        }
+
+        document.getElementById('deliveryRadio').addEventListener('change', function () {
+        const addressField = document.getElementById('addressField');
+        addressField.style.display = this.checked ? 'block' : 'none';
+        });
+
+        document.querySelectorAll('input[name="deliveryOption"]').forEach(function (radio) {
+        radio.addEventListener('change', function () {
+        const addressField = document.getElementById('addressField');
+        // Ukryj pole adresu, jeśli wybierzesz "odbiór osobisty"
+            if (!document.getElementById('deliveryRadio').checked) {
+                addressField.style.display = 'none';
+            }
+        });
+        });
+
+        function confirmPayment() {
+    alert('Dziękujemy za zamówienie!');
+    closeOrderPopup();
+
+    // Otwórz link w nowym oknie
+    window.open('https://www.youtube.com/watch?v=2qBlE2-WL60&ab_channel=robro_.13', '_blank');
+}
+        </script>
+</body>
+</html>

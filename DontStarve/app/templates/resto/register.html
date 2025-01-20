@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -6,54 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ekran rejestracji do projektu.">
     <title>Ekran rejestracji</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Pasek na górze strony -->
     <header class="navbar">
         <div class="logo">
-            <img src="{% static 'logo.png' %}" alt="Logo" id="logo">
+            <img src="logo.png" alt="Logo" id="logo">
         </div>
         <div class="title">
-            <h1>Don't Starve</h1>
-        </div>
+			<a href="main.html" style="text-decoration: none; color: inherit;">
+				<h1>Don't Starve</h1>
+			</a>
+		</div>
     </header>
 
     <!-- Formularz rejestracji -->
     <div class="login-container">
         <h2>Załóż konto</h2>
-        <form id="{% static 'register-form' %}" action="/register/" method="POST">
-            {% csrf_token %}
-            {{ form.username.label_tag }}
-            {{ form.username }}
-            {{ form.username.errors }}
-
-            {{ form.email.label_tag }}
-            {{ form.email }}
-            {{ form.email.errors }}
-
-            {{ form.password.label_tag }}
-            {{ form.password }}
-            {{ form.password.errors }}
-
-            {{ form.password2.label_tag }}
-            {{ form.password2 }}
-            {{ form.password2.errors }}
-
-            
-            {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
-                <p class="text-danger small mt-2">{{ error }}</p>
-                {% endfor %}
-                {% else %}
-                <p> <br><br> </p>
-            {% endif %}
+        <form id="register-form" action="/register" method="POST">
+            <input type="text" id="username" name="username" placeholder="Nazwa użytkownika" required>
+            <input type="email" id="email" name="email" placeholder="E-mail" required>
+            <input type="password" id="password" name="password" placeholder="Hasło" required>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Powtórz hasło" required>
             <button type="submit">Zarejestruj się</button>
         </form>
         <p id="error-message"></p>
-        <p class="register-link">Masz już konto? <a href="/login2/">Zaloguj się</a></p>
+        <p class="register-link">Masz już konto? <a href="login.html">Zaloguj się</a></p>
     </div>
 
-    <script src="{% static 'script.js' %}"></script>
+    <script src="script.js"></script>
 </body>
 </html>

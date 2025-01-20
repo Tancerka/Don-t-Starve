@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konto</title>
+    <link rel="stylesheet" href="stylemain.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo" id="logo">
+        </div>
+        <div class="title">
+            <a href="main.html" style="text-decoration: none; color: inherit;">
+                <h1>Don't Starve</h1>
+            </a>
+        </div>
+    </header>
+    <!-- Ikona menu -->
+    <div class="menu-icon" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Menu boczne -->
+    <div class="side-menu" id="sideMenu">
+        <ul>
+            <li><a href="reservation.html">Rezerwacja</a></li>
+            <li><a href="basket.html">Koszyk</a></li>
+            <li><a href="account.html">Konto</a></li>
+            <li><a href="login.html">Wyloguj</a></li>
+        </ul>
+    </div>
+
+    <!-- Główna sekcja -->
+    <div class="main-content">
+        <div class="account-panel">
+            <h1>Moje Konto</h1><br>
+            <!-- Informacje o użytkowniku -->
+            <div class="account-info">
+                <p><strong>Imię i Nazwisko:</strong> Jan Kowalski</p>
+                <p><strong>Email:</strong> jan.kowalski@example.com</p>
+                <p><strong>Telefon:</strong> 123-456-789</p>
+            </div>
+
+            <!-- Sekcja zmiany danych -->
+            <div class="account-section">
+                <h2>Zmień dane konta</h2>
+                <form action="/update-account" method="POST">
+                    <label for="email">Nowy e-mail:</label>
+                    <input type="email" id="email" name="email" placeholder="Wprowadź nowy e-mail" required>
+                    <button type="submit">Zmień e-mail</button>
+                </form>
+            </div><br>
+
+            <!-- Sekcja historii zamówień //przerobić implementacja python-->
+            <div class="account-section">
+                <h2>Historia zamówień</h2>
+                <div class="order-history">
+                    <div class="order">
+                        <h3>Zamówienie #12345</h3>
+                        <p>Data: 2025-01-12</p>
+                        <p>Dania: Pizza Margherita, Sałatka Grecka</p>
+                        <p>Kwota: 75 PLN</p>
+                    </div>
+                    <div class="order">
+                        <h3>Zamówienie #12344</h3>
+                        <p>Data: 2025-01-10</p>
+                        <p>Dania: Makaron Carbonara, Tiramisu</p>
+                        <p>Kwota: 55 PLN</p>
+                    </div>
+                    <!-- Kolejne zamówienia -->
+                </div>
+            </div>
+
+            <!-- Sekcja zarządzania kontem -->
+            <div class="account-section">
+                <h2>Zarządzanie kontem</h2>
+                <form action="/delete-account" method="POST">
+                    <button type="submit" class="account-button">Usuń konto</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const sideMenu = document.getElementById("sideMenu");
+            sideMenu.classList.toggle("open");
+        }
+    </script>
+</body>
+</html>

@@ -1,13 +1,11 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rezerwacja - Don't Starve</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="stylemain.css">
     <style>
-        /* Dodatkowe style dla kalendarza */
         body {
             margin: 0;
             padding: 0;
@@ -24,10 +22,10 @@
             max-width: 1200px;
             height: 100vh;
             background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
+            padding: 50px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-            margin: 20px 0;
+            margin: 200px 0;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -40,12 +38,12 @@
             margin-bottom: 20px;
         }
 
-            .calendar-header h2 {
-                color: #333;
-                font-size: 24px;
-                text-align: center;
-                margin: 0 20px;
-            }
+        .calendar-header h2 {
+            color: #333;
+            font-size: 24px;
+            text-align: center;
+            margin: 0 20px;
+        }
 
         .arrow {
             background-color: #4CAF50;
@@ -58,9 +56,9 @@
             height: 30px;
         }
 
-            .arrow:hover {
-                background-color: #45a049;
-            }
+        .arrow:hover {
+            background-color: #45a049;
+        }
 
         .days-of-week {
             display: grid;
@@ -70,11 +68,11 @@
             margin-bottom: 10px;
         }
 
-            .days-of-week div {
-                padding: 10px 0;
-                background-color: rgba(0, 0, 0, 0.1);
-                border-radius: 5px;
-            }
+        .days-of-week div {
+            padding: 10px 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
 
         .calendar-grid {
             display: grid;
@@ -93,28 +91,28 @@
             font-size: 18px;
         }
 
-            .day[data-availability="available"] {
-                background-color: #4CAF50; /* Zielony - dostępny */
-                color: #fff;
-            }
+        .day[data-availability="available"] {
+            background-color: #4CAF50;
+            color: #fff;
+        }
 
-            .day[data-availability="partially"] {
-                background-color: #FFC107; /* Żółty - częściowo dostępny */
-            }
+        .day[data-availability="partially"] {
+            background-color: #FFC107;
+        }
 
-            .day[data-availability="unavailable"] {
-                background-color: #F44336; /* Czerwony - niedostępny */
-                color: #fff;
-            }
+        .day[data-availability="unavailable"] {
+            background-color: #F44336;
+            color: #fff;
+        }
 
-            .day:hover {
-                filter: brightness(0.9);
-                color: #fff;
-            }
+        .day:hover {
+            filter: brightness(0.9);
+            color: #fff;
+        }
 
-            .day.selected {
-                border: 2px solid #FF0000; /* Podświetlenie wybranego dnia */
-            }
+        .day.selected {
+            border: 2px solid #FF0000;
+        }
 
         .selection-container {
             margin-top: 20px;
@@ -140,9 +138,9 @@
             width: 100%;
         }
 
-            .reserve-button:hover {
-                background-color: #45a049;
-            }
+        .reserve-button:hover {
+            background-color: #45a049;
+        }
 
         footer {
             margin-top: 20px;
@@ -154,17 +152,33 @@
     </style>
 </head>
 <body>
-    <!-- Pasek nawigacyjny -->
     <div class="navbar">
         <div class="logo">
-            <img src="{% static 'logo.png' %}" alt="Logo" id="logo">
-            <div class="title">
-                <h1>Restauracja "Don't Starve"</h1>
-            </div>
+            <img src="logo.png" alt="Logo" id="logo">
+        </div>
+        <div class="title">
+            <a href="main.html" style="text-decoration: none; color: inherit;">
+                <h1>Don't Starve</h1>
+            </a>
         </div>
     </div>
+    <!-- Ikona menu -->
+    <div class="menu-icon" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 
-    <!-- Kalendarz -->
+    <!-- Menu boczne -->
+    <div class="side-menu" id="sideMenu">
+        <ul>
+            <li><a href="reservation.html">Rezerwacja</a></li>
+            <li><a href="basket.html">Koszyk</a></li>
+            <li><a href="account.html">Konto</a></li>
+            <li><a href="login.html">Wyloguj</a></li>
+        </ul>
+    </div>
+    
     <main id="calendar-container">
         <div id="calendar">
             <div class="calendar-header">
@@ -186,7 +200,6 @@
             <div id="calendar-grid" class="calendar-grid"></div>
         </div>
 
-        <!-- Wybór godziny, stolika i przycisk -->
         <div class="selection-container">
             <label for="time">Wybierz godzinę:</label>
             <select id="time">
@@ -211,8 +224,7 @@
                 <option value="stolik6">Stolik 6 (12 osób)</option>
             </select>
 
-            <!-- Przycisk rezerwacji -->
-            <button class="reserve-button" id="reserve-button">Zarezerwuj</button> <!-- potrzebna implementacja python - sprawdź dostępność i dodaj datę do bazy danych-->
+            <button class="reserve-button" id="reserve-button">Zarezerwuj</button>
         </div>
     </main>
 
@@ -224,6 +236,7 @@
         const calendarGrid = document.getElementById('calendar-grid');
         const monthYear = document.getElementById('month-year');
         let currentDate = new Date();
+        let selectedDay = null; // Keep track of the currently selected day
 
         function generateCalendar(date) {
             const year = date.getFullYear();
@@ -245,13 +258,18 @@
                 dayDiv.classList.add('day');
                 dayDiv.textContent = day;
 
-                const availability = ["available", "partially", "unavailable"][ //aktualnie jest to losowe czy data jest dostępna czy nie
+                const availability = ["available", "partially", "unavailable"][
                     Math.floor(Math.random() * 3)
                 ];
                 dayDiv.setAttribute("data-availability", availability);
 
                 dayDiv.addEventListener('click', () => {
-                    dayDiv.classList.toggle('selected');
+                    if (selectedDay) {
+                        selectedDay.classList.remove('selected');
+                    }
+
+                    dayDiv.classList.add('selected');
+                    selectedDay = dayDiv;
                 });
 
                 calendarGrid.appendChild(dayDiv);
@@ -268,8 +286,12 @@
             generateCalendar(currentDate);
         });
 
-        // Initial calendar generation
         generateCalendar(currentDate);
+
+        function toggleMenu() {
+            const sideMenu = document.getElementById("sideMenu");
+            sideMenu.classList.toggle("open");
+        }
     </script>
 </body>
 </html>

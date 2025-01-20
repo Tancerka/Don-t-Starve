@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zamów online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Pasek na górze strony -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo" id="logo">
+        </div>
+        <div class="title">
+            <a href="main.html" style="text-decoration: none; color: inherit;">
+                <h1>Don't Starve</h1>
+            </a>
+        </div>
+    </header>
+    <!-- Ikona menu -->
+    <div class="menu-icon">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Menu boczne -->
+    <div class="side-menu">
+        <ul>
+            <li><a href="reservation.html">Rezerwacja</a></li>
+            <li><a href="takeaway.html">Zamów online</a></li>
+            <li><a href="basket.html">Koszyk</a></li>
+            <li><a href="account.html">Konto</a></li>
+            <li><a href="login.html">Wyloguj</a></li>
+        </ul>
+    </div>
+
+    <!-- Główna sekcja -->
+    <div class="main-content">
+        <h1>Zamów online</h1>
+
+        <!-- Lista dań -->
+        <div class="menu-items">
+            <div class="dish">
+                <img src="dish1.jpg" alt="Danie 1">
+                <div class="dish-info">
+                    <h3>Pizza Margherita</h3>
+                    <p>Pomidor, mozzarella, bazylia</p>
+                </div>
+                <div class="dish-price">
+                    <span>30 PLN</span>
+                    <form action="/add-to-basket" method="POST">
+                        <input type="hidden" name="dish_id" value="1">
+                        <button type="submit">Dodaj do koszyka</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="dish">
+                <img src="dish2.jpg" alt="Danie 2">
+                <div class="dish-info">
+                    <h3>Makaron Carbonara</h3>
+                    <p>Makaron, boczek, jajko, parmezan</p>
+                </div>
+                <div class="dish-price">
+                    <span>40 PLN</span>
+                    <form action="/add-to-basket" method="POST">
+                        <input type="hidden" name="dish_id" value="2">
+                        <button type="submit">Dodaj do koszyka</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="dish">
+                <img src="dish3.jpg" alt="Danie 3">
+                <div class="dish-info">
+                    <h3>Sałatka Grecka</h3>
+                    <p>Ogórek, pomidor, oliwki, feta</p>
+                </div>
+                <div class="dish-price">
+                    <span>20 PLN</span>
+                    <form action="/add-to-basket" method="POST">
+                        <input type="hidden" name="dish_id" value="3">
+                        <button type="submit">Dodaj do koszyka</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Można dodać więcej dań w podobny sposób -->
+
+        </div>
+
+        <!-- Formularz składania zamówienia -->
+        <div class="order-form">
+            <h2>Twoje zamówienie</h2>
+            <form action="/place-order" method="POST">
+                <div class="form-group">
+                    <label for="name">Imię i nazwisko:</label>
+                    <input type="text" id="name" name="name" placeholder="Wprowadź imię i nazwisko" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Adres dostawy:</label>
+                    <input type="text" id="address" name="address" placeholder="Wprowadź adres dostawy" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Numer telefonu:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Wprowadź numer telefonu" required>
+                </div>
+                <button type="submit" class="checkout-button">Złóż zamówienie</button>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,13 +1,23 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona Główna</title>
-    <link rel="stylesheet" href="{% static 'stylemain.css' %}">
+    <link rel="stylesheet" href="stylemain.css">
 </head>
 <body>
+    <!-- Pasek na górze strony -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo" id="logo">
+        </div>
+        <div class="title">
+            <a href="main.html" style="text-decoration: none; color: inherit;">
+                <h1>Don't Starve</h1>
+            </a>
+        </div>
+    </header>
     <!-- Ikona menu -->
     <div class="menu-icon" onclick="toggleMenu()">
         <div></div>
@@ -18,11 +28,10 @@
     <!-- Menu boczne -->
     <div class="side-menu" id="sideMenu">
         <ul>
-            <li><a href="/reservation/">Rezerwacja</a></li>
-            <!--<li><a href="takeaway.html">Zamów online</a></li>-->
-            <!--<li><a href="basket.html">Koszyk</a></li> -->
-            <!-- <li><a href="account.html">Konto</a></li>--> 
-            <li><a href="/login2/">Wyloguj</a></li>
+            <li><a href="reservation.html">Rezerwacja</a></li>
+            <li><a href="basket.html">Koszyk</a></li>
+            <li><a href="account.html">Konto</a></li>
+            <li><a href="login.html">Wyloguj</a></li>
         </ul>
     </div>
 

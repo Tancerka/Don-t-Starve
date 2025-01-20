@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podsumowanie Zamówienia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="popup" id="orderSummaryPopup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2>Podsumowanie zamówienia</h2>
+            <div class="order-details">
+                <p><strong>Twoje zamówienie:</strong></p>
+                <ul id="orderItemsList">
+                    <!-- Tutaj będą wyświetlane zamówione produkty -->
+                </ul>
+
+                <p><strong>Twoje dane:</strong></p>
+                <p id="userName">Imię: Jan Kowalski</p>
+                <p id="userEmail">Email: jan.kowalski@example.com</p>
+
+                <p><strong>Wybierz opcję dostawy:</strong></p>
+                
+                <form action="#" method="POST">
+                    <label>
+                        <input type="radio" name="deliveryOption" value="pickup" checked> Odbiór osobisty
+                    </label><br>
+                    <label>
+                        <input type="radio" name="deliveryOption" value="delivery"> Dostawa na adres
+                    </label><br>
+
+                    <!-- Pole adresowe (widoczne tylko, gdy wybrano dostawę) -->
+                    <div class="address-field">
+                        <label for="address">Adres dostawy:</label>
+                        <input type="text" id="address" name="address" placeholder="Wpisz adres dostawy" required>
+                    </div>
+
+                    <p><strong>Kwota do zapłaty:</strong> <span id="totalAmount">100 PLN</span></p>
+
+                    <button type="submit">Potwierdź zamówienie</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

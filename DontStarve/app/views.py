@@ -60,4 +60,32 @@ def reservation(request):
     else:
         username = None  # Brak zalogowanego użytkownika
     return render(request, "resto/reservation.html",{'username': username})
-  
+ 
+def account(request):
+    if request.user.is_authenticated:
+        username = request.user.username  # Pobierz nazwę użytkownika
+    else:
+        username = None  # Brak zalogowanego użytkownika
+    return render(request, "resto/account.html",{'form': form})
+ 
+def basket(request):
+    if request.user.is_authenticated:
+        username = request.user.username  # Pobierz nazwę użytkownika
+    else:
+        username = None  # Brak zalogowanego użytkownika
+    return render(request, "resto/basket.html",{'form': form})
+ 
+def order_summary(request):
+    if request.user.is_authenticated:
+        username = request.user.username  # Pobierz nazwę użytkownika
+    else:
+        username = None  # Brak zalogowanego użytkownika
+    return render(request, "resto/order_summary.html",{'form': form})
+ 
+def takeaway(request):
+    if request.user.is_authenticated:
+        username = request.user.username  # Pobierz nazwę użytkownika
+    else:
+        username = None  # Brak zalogowanego użytkownika
+    return render(request, "resto/takaway.html",{'form': form})
+
