@@ -5,24 +5,6 @@ from django.contrib import messages
 
 # Create your views here.
 
-def home(request):
-    if request.user.is_authenticated:
-        username = request.user.username  # Pobierz nazwę użytkownika
-    else:
-        username = None  # Brak zalogowanego użytkownika
-    return render(request, "home.html",{'username': username})
-
-def logowanie(request):
-    if request.method == 'POST':
-        form = CustomLoginForm(request, data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('home')  # Przekierowanie po zalogowaniu
-    else:
-        form = CustomLoginForm()
-
-    return render(request, "resto/index.html", {'form': form})
 
 def main(request):
     if request.user.is_authenticated:
@@ -62,30 +44,14 @@ def reservation(request):
     return render(request, "resto/reservation.html",{'username': username})
  
 def account(request):
-    if request.user.is_authenticated:
-        username = request.user.username  # Pobierz nazwę użytkownika
-    else:
-        username = None  # Brak zalogowanego użytkownika
-    return render(request, "resto/account.html",{'form': form})
+    return render(request, "resto/account.html")
  
 def basket(request):
-    if request.user.is_authenticated:
-        username = request.user.username  # Pobierz nazwę użytkownika
-    else:
-        username = None  # Brak zalogowanego użytkownika
-    return render(request, "resto/basket.html",{'form': form})
+    return render(request, "resto/basket.html")
  
 def order_summary(request):
-    if request.user.is_authenticated:
-        username = request.user.username  # Pobierz nazwę użytkownika
-    else:
-        username = None  # Brak zalogowanego użytkownika
-    return render(request, "resto/order_summary.html",{'form': form})
+    return render(request, "resto/order_summary.html")
  
 def takeaway(request):
-    if request.user.is_authenticated:
-        username = request.user.username  # Pobierz nazwę użytkownika
-    else:
-        username = None  # Brak zalogowanego użytkownika
-    return render(request, "resto/takaway.html",{'form': form})
+    return render(request, "resto/takaway.html")
 

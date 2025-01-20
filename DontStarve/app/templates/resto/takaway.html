@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zamów online</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
     <!-- Pasek na górze strony -->
@@ -28,11 +29,12 @@
     <!-- Menu boczne -->
     <div class="side-menu">
         <ul>
-            <li><a href="reservation.html">Rezerwacja</a></li>
-            <li><a href="takeaway.html">Zamów online</a></li>
-            <li><a href="basket.html">Koszyk</a></li>
-            <li><a href="account.html">Konto</a></li>
-            <li><a href="login.html">Wyloguj</a></li>
+            
+            <li><a href="/reservation">Rezerwacja</a></li>
+            <li><a href="/takeaway">Zamów online</a></li>
+            <li><a href="/basket">Koszyk</a></li>
+            <li><a href="/order">Konto</a></li>
+            <li><a href="/login">Wyloguj</a></li>
         </ul>
     </div>
 
