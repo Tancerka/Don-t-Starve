@@ -1,10 +1,8 @@
 from django.shortcuts import render, redirect
-from .logowanie.form import CustomLoginForm, CustomRegisterForm
-from django.contrib.auth import authenticate, login
-from django.contrib import messages
+from django.http import HttpResponse
+from .form import CustomLoginForm ,CreateUserForm #CustomRegisterForm,
 
 # Create your views here.
-
 
 def main(request):
     if request.user.is_authenticated:
@@ -19,7 +17,7 @@ def login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('main')  # Przekierowanie po zalogowaniu
+            return redirect('/main')  # Przekierowanie po zalogowaniu
     else:
         form = CustomLoginForm()
     return render(request, "resto/login.html",{'form': form})
@@ -27,12 +25,14 @@ def login(request):
 
 def register(request):
     if request.method == 'POST':
-        form = CustomRegisterForm(request, data=request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('resto/main.html')  # Przekierowanie po rejestracji
+            return redirect('login')  # Przekierowanie po rejestracji
+        context = {'form': form}
+        return render(request, "resto/register.html", context)
     else:
-        form = CustomRegisterForm()
+        form = CreateUserForm()
     return render(request, "resto/register.html",{'form': form})
 
 
