@@ -53,7 +53,10 @@
             <li><a href="/basket">Koszyk</a></li>
             {% if user.is_authenticated %}
             <li><a href="#" onclick="openPopup()">Konto</a></li>
+            <li><a href="{% url 'add_dish' %}" class="btn btn-primary">Dodaj nowe danie</a></li>
             {% endif %}
+        </div>
+      
         </ul>
     </div>
 
@@ -158,31 +161,24 @@
     </script>
 
     <!-- Główna zawartość -->
-    <div class="main-content">
+    <div class="main-content" id="dishes-container">
+        {% for dish in dishes %}
         <div class="dish">
-            <img src="dish1.jpg" alt="Zdjęcie dania">
+            <img src="{{ dish.image_url }}" alt="Zdjęcie dania">
             <div class="dish-info">
-                <h3>Nazwa Dania 1</h3>
-                <p>Składnik 1, Składnik 2, Składnik 3</p>
+                <h3>{{ dish.name }}</h3>
+                <p>{{ dish.description }}</p>
             </div>
             <div class="dish-price">
-                <span>25 PLN</span>
-                <button>Dodaj do koszyka</button>
+                <span>{{ dish.price }} PLN</span>
+                <a href="{% url 'add_to_basket' dish.id %}" class="btn btn-primary">Dodaj do koszyka</a>
             </div>
         </div>
-
-        <div class="dish">
-            <img src="dish2.jpg" alt="Zdjęcie dania">
-            <div class="dish-info">
-                <h3>Nazwa Dania 2</h3>
-                <p>Składnik A, Składnik B, Składnik C</p>
-            </div>
-            <div class="dish-price">
-                <span>30 PLN</span>
-                <button>Dodaj do koszyka</button>
-            </div>
+        {% endfor %}
+   
         </div>
-
+        
+        
         <!-- trzeba to zautomatyzować zależnie od ilości dań w bazie danych-->
     </div>
 

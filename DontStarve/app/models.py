@@ -33,13 +33,13 @@ class Reservation(models.Model):
 
 # Model dla menu dań
 class Dish(models.Model):
-    name = models.CharField(max_length=100)  # Nazwa dania
-    description = models.TextField(blank=True, null=True)  # Opis dania
-    price = models.DecimalField(max_digits=6, decimal_places=2)  # Cena dania
-    available = models.BooleanField(default=True)  # Czy danie jest dostępne
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    image_url = models.URLField(default='https://example.com/placeholder.jpg')
 
     def __str__(self):
-        return f"{self.name} - {self.price} PLN"
+        return self.name
 
 # Model dla koszyka
 class Basket(models.Model):
