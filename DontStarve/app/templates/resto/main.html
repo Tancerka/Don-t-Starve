@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strona Główna</title>
     <link rel="stylesheet" href="{% static 'stylemain.css' %}">
+    <style>
+        .user-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            text-align: right;
+        }
+        .user-info a {
+            display: block;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
     <!-- Pasek na górze strony -->
@@ -17,6 +29,14 @@
             <a href="/" style="text-decoration: none; color: inherit;">
                 <h1>Don't Starve</h1>
             </a>
+        </div>
+        <div class="user-info">
+            {% if user.is_authenticated %}
+                <span>Witaj, {{ user.username }}!</span>
+                <a href="{% url 'logout' %}">Wyloguj się</a>
+            {% else %}
+                <a href="{% url 'login' %}">Zaloguj się</a>
+            {% endif %}
         </div>
     </header>
     <!-- Ikona menu -->
@@ -31,10 +51,111 @@
         <ul>
             <li><a href="/reservation">Rezerwacja</a></li>
             <li><a href="/basket">Koszyk</a></li>
-            <li><a href="/order">Konto</a></li>
-            <li><a href="/login">Wyloguj</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="#" onclick="openPopup()">Konto</a></li>
+            {% endif %}
         </ul>
     </div>
+
+    <div class="popup" id="orderSummaryPopup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2>Dane Użytkownika</h2>
+            <div class="order-details">
+                <ul id="orderItemsList">
+                    <!-- Tutaj będą wyświetlane zamówione produkty -->
+                </ul>
+
+                <form action="{% url 'order_summary' %}" method="POST">
+                    {% csrf_token %}
+                    <label for="firstName">Imię:</label>
+                    <input type="text" id="firstName" name="firstName" value="{{ user.first_name }}" required><br>
+                    <label for="lastName">Nazwisko:</label>
+                    <input type="text" id="lastName" name="lastName" value="{{ user.last_name }}" required><br>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="{{ user.email }}" readonly><br>
+                    <label for="address">Adres:</label>
+                    <input type="text" id="address" name="address" value="{{ user.profile.address }}" required><br>
+                
+                    <button type="submit">Zaktualizuj dane</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1000;
+            width: 90%;
+            max-width: 500px;
+        }
+        .popup-content {
+            max-width: 500px;
+            margin: auto;
+        }
+        .close-btn {
+            float: right;
+            font-size: 20px;
+            cursor: pointer;
+            color: #aaa;
+        }
+        .close-btn:hover {
+            color: #000;
+        }
+        .popup h2 {
+            margin-top: 0;
+            font-size: 24px;
+            text-align: center;
+        }
+        .popup form {
+            display: flex;
+            flex-direction: column;
+        }
+        .popup label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .popup input {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .popup button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #45a049;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .popup button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function toggleMenu() {
+            const sideMenu = document.getElementById("sideMenu");
+            sideMenu.classList.toggle("open");
+        }
+
+        function openPopup() {
+            document.getElementById("orderSummaryPopup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("orderSummaryPopup").style.display = "none";
+        }
+    </script>
 
     <!-- Główna zawartość -->
     <div class="main-content">

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Podsumowanie Zamówienia</title>
+    <title>Dane użytkownika</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
@@ -12,40 +12,52 @@
     <div class="popup" id="orderSummaryPopup">
         <div class="popup-content">
             <span class="close-btn" onclick="closePopup()">&times;</span>
-            <h2>Podsumowanie zamówienia</h2>
+            <h2>Dane Użytkownika</h2>
             <div class="order-details">
-                <p><strong>Twoje zamówienie:</strong></p>
                 <ul id="orderItemsList">
                     <!-- Tutaj będą wyświetlane zamówione produkty -->
                 </ul>
 
-                <p><strong>Twoje dane:</strong></p>
-                <p id="userName">Imię: Jan Kowalski</p>
-                <p id="userEmail">Email: jan.kowalski@example.com</p>
-
-                <p><strong>Wybierz opcję dostawy:</strong></p>
+                <form action="{% url 'order_summary' %}" method="POST">
+                    {% csrf_token %}
+                    <label for="firstName">Imię:</label>
+                    <input type="text" id="firstName" name="firstName" value="{{ user.first_name }}" required><br>
+                    <label for="lastName">Nazwisko:</label>
+                    <input type="text" id="lastName" name="lastName" value="{{ user.last_name }}" required><br>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="{{ user.email }}" readonly><br>
+                    <!-- <label for="address">Adres:</label> -->
+                    <!-- <input type="text" id="address" name="address" value="{{ user.profile.address }}" required><br>
                 
-                <form action="#" method="POST">
+                    <p><strong>Wybierz opcję dostawy:</strong></p> -->
                     <label>
-                        <input type="radio" name="deliveryOption" value="pickup" checked> Odbiór osobisty
+                        <!-- <input type="radio" name="deliveryOption" value="pickup" checked> Odbiór osobisty
                     </label><br>
                     <label>
                         <input type="radio" name="deliveryOption" value="delivery"> Dostawa na adres
-                    </label><br>
-
-                    <!-- Pole adresowe (widoczne tylko, gdy wybrano dostawę) -->
+                    </label><br> -->
+                
                     <div class="address-field">
-                        <label for="address">Adres dostawy:</label>
-                        <input type="text" id="address" name="address" placeholder="Wpisz adres dostawy" required>
+                        <label for="address">Adres:</label>
+                        <input type="text" id="address" name="address" value="{{ user.profile.address }}"><br>
                     </div>
-
-                    <p><strong>Kwota do zapłaty:</strong> <span id="totalAmount">100 PLN</span></p>
-
-                    <button type="submit">Potwierdź zamówienie</button>
+                
+                    <button type="submit">Zaktualizuj dane</button>
                 </form>
             </div>
         </div>
     </div>
-
 </body>
-</html>
+</html>                    <!-- <label for="address">Adres:</label> -->
+                    <!-- <input type="text" id="address" name="address" value="{{ user.profile.address }}" required><br>
+                
+                    <p><strong>Wybierz opcję dostawy:</strong></p> -->
+                    <label>
+                        <!-- <input type="radio" name="deliveryOption" value="pickup" checked> Odbiór osobisty
+                    </label><br>
+                    <label>
+                        <input type="radio" name="deliveryOption" value="delivery"> Dostawa na adres
+                    </label><br> -->
+                
+                    <div class="address-field">
+                            </div>

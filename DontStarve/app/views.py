@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .form import CustomLoginForm ,CreateUserForm #CustomRegisterForm,
+from django.contrib.auth import login as auth_login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from .models import Profile
 
 # Create your views here.
 
@@ -12,15 +16,17 @@ def main(request):
     return render(request, "resto/main.html",{'username': username})
 
 def login(request):
-    if request.method == 'POST':
+     if request.method == 'POST':
         form = CustomLoginForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
-            login(request, user)
-            return redirect('/main')  # Przekierowanie po zalogowaniu
-    else:
+            auth_login(request, user)
+            # Ensure the user has a profile
+            Profile.objects.get_or_create(user=user)
+            return redirect('/')  # Redirect to the main page after login
+     else:
         form = CustomLoginForm()
-    return render(request, "resto/login.html",{'form': form})
+     return render(request, "resto/login.html",{'form': form})
 
 
 def register(request):
@@ -49,9 +55,28 @@ def account(request):
 def basket(request):
     return render(request, "resto/basket.html")
  
+@login_required
 def order_summary(request):
-    return render(request, "resto/order_summary.html")
+    if request.method == 'POST':
+        first_name = request.POST.get('firstName')
+        last_name = request.POST.get('lastName')
+        address = request.POST.get('address')
+        
+        # Update the user's first name, last name, and address
+        user = request.user
+        user.first_name = first_name
+        user.last_name = last_name
+        user.profile.address = address  # Assuming you have a Profile model with an address field
+        user.profile.save()
+        user.save()
+        
+        return redirect('/')  # Redirect to the same page after saving
+
+    return render(request, 'resto/order_summary.html')
  
 def takeaway(request):
     return render(request, "resto/takaway.html")
 
+def custom_logout(request):
+    logout(request)
+    return redirect('/')  # Redirect to the main page after logout

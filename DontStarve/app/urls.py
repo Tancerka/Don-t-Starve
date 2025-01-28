@@ -7,9 +7,10 @@ urlpatterns = [
     path("login/",views.login, name="login"),
     path("register/",views.register, name="register"),
     path("reservation/",views.reservation, name="reservation"),
-    path('logout/', LogoutView.as_view(), name='logout'),
+    path('logout/', views.custom_logout, name='logout'),
     path('account/',views.account,name='account'),
     path('basket/',views.basket,name='basket'),
     path('order/',views.order_summary,name='order'),
     path('takeaway/',views.takeaway,name='takeaway'),
+    path('order_summary/', views.order_summary, name='order_summary'),
 ]

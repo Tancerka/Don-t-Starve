@@ -57,3 +57,10 @@ class BasketItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} x {self.dish.name} ({self.basket.user.username})"
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    address = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username
